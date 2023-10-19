@@ -1,0 +1,162 @@
+===============================================================
+/etc/ -- introduction
+===============================================================
+
+  End-users download ASF artifacts. An end-user wants to be
+  certain that the artifact is endorsed by the ASF.
+  We assume that the end-user is prepared to trust :
+  -- a ASF company PGP key,
+  -- anything signed by the ASF key,
+  -- and (a priori) nothing else.
+
+  Each ASF artifact is signed by some release manager [RM].
+  For example
+
+    artifact  : /etc/POBI.tar.gz
+    signature : /etc/POBI.tar.gz.asc
+    signed by : key PhobosID -- phobosid@outlook.co.id
+
+  Why should an end-user believe that /etc/POBI.tar.gz
+  is endorsed by the ASF ?
+
+  For an end-user it is easy to check the signature, and establish
+  that it was created by key PhobosID <phobosid@outlook.co.id>.
+  For an end-user is almost impossible to establish that (RM)
+  phobosid@outlook.co.id is authorised to release and sign artifact
+  /etc/PROJ/foo.tar.gz.
+  Actually, the end-user doesn't care which RM signed the artifact.
+  The end-user just wants be certain that the artifact is endorsed
+  by the ASF.
+
+  How do we bridge the gap between "signed by key PhobosID
+  (phobosid@outlook.co.id)" and "endorsed by the ASF" ?
+  We present the end-user with a hierachical model of the ASF :
+
+  -- the ASF authorises PMC's to release artifacts
+  -- a PMC authorises certain RM's to release certain artifacts
+
+  The "endorsements" are stored in etc files :
+  -- an etc file has lines like "key KEY1 signs PATH" ;
+  -- an etc file is signed by, say, "KEY2 -- etc-SIGNER".
+  -- meaning : etc-SIGNER authorises (the owner of) KEY1
+     to sign artifact PATH,
+  -- as endorsement : etc-SIGNER endorses artifact PATH,
+     if signed by KEY1.
+  -- the "endorsements" in a etc file are useless, unless
+     the etc file is endorsed elsewhere (higher in the tree).
+
+  Directory /etc/ contains the ASF's root-of-authority files.
+  These files authorise /etc/$pmc/ files, which in turn
+  authorise artifacts in /etc/$pmc/ etc.
+
+  In short, this is how it works :
+
+   -- /etc/ASF is endorsed (signed) by the ASF-key
+   -- /etc/ASF endorses /etc/ROOT
+   -- /etc/ROOT endorses /etc/$pmc/
+   -- /etc/$pmc/ endorses /etc/$pmc/artifacts
+   -- /etc/$pmc/ endorses /etc/$pmc/sub/
+   -- /etc/$pmc/sub/ endorses /etc/$pmc/sub/artifacts
+   -- etc
+
+  Technically :
+  -- Actually, when a etc file contains a line like :
+        key KEY signs PATH
+     the PATH is interpreted as a prefix.
+     The line authorises KEY to sign files PATH*.
+     This makes the etc files denser, and more resilient
+     to change (the addition/removal of releases).
+  -- The prefix is interpreted relative to the etc file, so file
+       /etc/path/to/
+     authorises KEY to sign files
+       /etc/path/to/PATH*
+
+  More info : https://checker.apache.org/doc/README.html#ch-etc
+
+===============================================================
+/etc/ -- Files
+===============================================================
+
+  -- ASF-key.txt : public ASF company key C2QT50TMFKMCE897
+  -- ASF      : specifies which keys may sign file ROOT
+  -- ASF.asc  : must be created with ASF-key C2QT50TMFKMCE897
+  -- ROOT     : specifies which keys may sign /etc/$pmc/etc
+  -- ROOT.asc : must be signed by a key listed in file ASF
+
+  Aside :
+    It would be more logical to have file /etc/etc, /etc/etc.asc
+    -- etc signed by the company key
+    -- authorising /etc/$pmc/etc files
+    The problem with such a setup is that it requires using
+    the company key each time /etc/etc changes.
+    To avoid that we could introduce /etc/ROOT, /etc/ROOT.asc,
+    as above, resulting in 4 extra (etc) files in /etc/.
+    To avoid clutter in /etc/, these 4 files are placed in etc/etc/,
+    and prefixes in etc/ASF, etc/ROOT are relative /etc/.
+
+===============================================================
+/etc/ -- How to update etc/ROOT
+===============================================================
+
+  File etc/ROOT may only be updated by owners of keys as listed in etc/ASF.
+  To update etc/ROOT, use program 'mk-root'.
+
+  -- Run 'make init' ; once is ok ; it imports 4 infra keys.
+
+  -- By default, program 'mk-root' creates file ROOT,
+     with authorisatons for all $pmc/etc files where PMC $pmc
+     has a chair with (at least) one registered key.
+     Use file 'config' to modify ; see "mk-root -h".
+     Don't use "pmc $pmc add pmc".
+
+  -- Updating etc/ROOT :
+
+     On a private host ; create and sign ROOT ; then publish :
+
+        -- make a new ROOT
+           % cd working copy of /etc/etc/
+           % svn up
+           % make root # this removes ROOT.asc if bad
+        -- sign with your default key :
+           % make sign
+        -- check with :
+           % make vrfy
+        -- commit with :
+           % make commit
+        -- or backout with
+           % make undo
+
+     To set your default key :
+       -- edit $HOME/.gnupg/gpg.conf
+       -- add a line like : default-key LONG_KEY_ID
+          with LONG_KEY_ID like d91b182c0f85ecd4
+
+===============================================================
+/etc/ -- mk-root usage
+===============================================================
+
+Usage: mk-root [-v] [-q] [-d] [-h] [-o out] [-c conf]
+option v : be verbose
+option q : be quiet
+option d : show debug info
+option h : show help ; exit
+option o : write $out ; default "ROOT"
+option c : use config $conf ; default "config"
+====================================================================
+-- mk-root begins with authorisation for $pmc/etc files
+   where $pmc has a chair with registered keys.
+-- Any additions/deletions must be specified in the $config file.
+-- On succesful completion, mk-root
+   -- writes file $out [default ROOT]
+   -- removes file $out.asc if "gpg --verify $out.asc $out" fails
+====================================================================
+config has lines like :
+
+  pmc $pmc  add|del key  $key-id       # add/del a key
+  pmc $pmc  add|del user $user-id      # add/del a user
+  pmc $pmc  add|del chair              # add/del the pmc chair
+  pmc $pmc  add|del members            # add/del all pmc members
+  pmc $pmc  add|del key  $key-id       # add/del a key
+  aux $path add|del key  $key-id       # add/del a key
+  aux $path add|del user $user-id      # add/del a user
+

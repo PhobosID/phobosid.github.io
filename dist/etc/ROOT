@@ -1,0 +1,502 @@
+# Generated ; DO NOT EDIT
+
+# no keys for chair bsnyder activemq/META
+# no keys for chair smarru airavata/META
+# no keys for chair jluniya ambari/META
+# no keys for chair jhm ant/META
+# no keys for chair olamy archiva/META
+# no keys for chair jacques arrow/META
+# no keys for chair jfarrell aurora/META
+# no keys for chair thiru avro/META
+# no keys for chair robertlazarski axis/META
+# no keys for chair lresende bahir/META
+# no keys for chair kenn beam/META
+# no keys for chair ywkim bigtop/META
+# no keys for chair gjm bloodhound/META
+# no keys for chair toulmean buildr/META
+# no keys for chair mbenson bval/META
+# no keys for chair zznate cassandra/META
+# no keys for chair mgentry cayenne/META
+# no keys for chair huikyole climate/META
+# no keys for chair paul_a cloudstack/META
+# no keys for chair cdamioli cocoon/META
+# no keys for chair purplecabbage cordova/META
+# no keys for chair jwills crunch/META
+# no keys for chair iluo dubbo/META
+# no keys for chair yonzhang2012 eagle/META
+# no keys for chair pallavi falcon/META
+# no keys for chair vishwasbabu fineract/META
+# no keys for chair okrueger flex/META
+# no keys for chair sewen flink/META
+# no keys for chair szaboferee flume/META
+# no keys for chair kturner fluo/META
+# no keys for chair kmiller geode/META
+# no keys for chair dionysios giraph/META
+# no keys for chair chl501 hama/META
+# no keys for chair lei_chang hawq/META
+# no keys for chair misty hbase/META
+# no keys for chair kishoreg helix/META
+# no keys for chair hashutosh hive/META
+# no keys for chair asankha httpcomponents/META
+# no keys for chair dmagda ignite/META
+# no keys for chair mreutegg jackrabbit/META
+# no keys for chair junrao kafka/META
+# no keys for chair jbonofre karaf/META
+# no keys for chair lmccay knox/META
+# no keys for chair danny labs/META
+# no keys for chair aaronfeng madlib/META
+# no keys for chair benh mesos/META
+# no keys for chair geertjan netbeans/META
+# no keys for chair gezapeti oozie/META
+# no keys for chair rwhitcomb pivot/META
+# no keys for chair taylor portals/META
+# no keys for chair mmerli pulsar/META
+# no keys for chair motus reef/META
+# no keys for chair vintagewang rocketmq/META
+# no keys for chair snoopdave roller/META
+# no keys for chair nickpan47 samza/META
+# no keys for chair ningjiang servicecomb/META
+# no keys for chair lhazlewood shiro/META
+# no keys for chair wusheng skywalking/META
+# no keys for chair matei spark/META
+# no keys for chair venkatrangan sqoop/META
+# no keys for chair ptgoetz storm/META
+# no keys for chair deron systemml/META
+# no keys for chair thiagohp tapestry/META
+# no keys for chair petasis tcl/META
+# no keys for chair jeagles tez/META
+# no keys for chair dblevins tomee/META
+# no keys for chair neuman trafficcontrol/META
+# no keys for chair mrusso usergrid/META
+# no keys for chair nbubna velocity/META
+# no keys for chair mrglavas xerces/META
+# no keys for chair clay xmlgraphics/META
+# no keys for chair moon zeppelin/META
+
+# pmc accumulo [chair] mjwall
+key f899dbf0b8c3d406 signs accumulo/META
+
+# pmc airflow [chair] bolke
+key 35190b83d905a0ba signs airflow/META
+
+# pmc allura [chair] brondsem
+key 56f0526f9bb3ce70 signs allura/META
+
+# pmc any23 [chair] lewismc
+key 3a4717f048baebf6 signs any23/META
+
+# pmc apex [chair] thw
+key 12dee3e4d920a98c signs apex/META
+
+# pmc apr [chair] niq
+key 6d0bc73a40581837 signs apr/META
+key f3b9d88cb87f79a9 signs apr/META
+
+# pmc aries [chair] cschneider
+key 4715dc026428bdba signs aries/META
+
+# pmc asterixdb [chair] tillw
+key 2501e46bbaed10bc signs asterixdb/META
+
+# pmc atlas [chair] madhan
+key 54ea1b4ffa03b08a signs atlas/META
+
+# pmc attic [chair] henkp
+key 8b962943fc243f3c signs attic/META
+
+# pmc bookkeeper [chair] sijie
+key d2b9a12ecb0bb77c signs bookkeeper/META
+
+# pmc brooklyn [chair] geomacy
+key cf4a2588c3fe8b7d signs brooklyn/META
+
+# pmc calcite [chair] francischuang
+key bbe44e923a970ab7 signs calcite/META
+
+# pmc camel [chair] acosentino
+key 27431af6e1ae50bb signs camel/META
+
+# pmc carbondata [chair] chenliang613
+key a0b4ef5af74b47e2 signs carbondata/META
+
+# pmc celix [chair] pnoltes
+key e85a81ac9f60113d signs celix/META
+
+# pmc chemistry [chair] fmui
+key 6aaba9e80f1bbc46 signs chemistry/META
+
+# pmc chukwa [chair] eyang
+key f67bf0e66170391d signs chukwa/META
+
+# pmc clerezza [chair] hasan
+key 0a9295f94e312340 signs clerezza/META
+
+# pmc comdev [chair] sharan
+key a178d2adc618e020 signs comdev/META
+
+# pmc commons [chair] ggregory
+key 86fdc7e2a11262cb signs commons/META
+
+# pmc couchdb [chair] jan
+key eca5bcb7bb9656b0 signs couchdb/META
+
+# pmc creadur [chair] brianf
+key 205c8673dc742c7c signs creadur/META
+key 9b1fda9f3c062231 signs creadur/META
+
+# pmc ctakes [chair] chenpei
+key f97c492fd218bb0a signs ctakes/META
+
+# pmc curator [chair] randgalt
+key 96f0914f88e926a4 signs curator/META
+
+# pmc cxf [chair] dkulp
+key 858fc4c4f43856a3 signs cxf/META
+key abc8ee39bb550746 signs cxf/META
+
+# pmc datafu [chair] mhayes
+key 3e0ce5397ba4c7df signs datafu/META
+key 5580c02d01d3de61 signs datafu/META
+
+# pmc db [chair] bpendleton
+key 66c02fe18b5c5237 signs db/META
+
+# pmc deltaspike [chair] struberg
+key e91287822fdb81b1 signs deltaspike/META
+
+# pmc directory [user] elecharny
+key 31474e5e7c6b7034 signs directory/META
+
+# pmc directory [chair] smckinney
+key c785b8885d54a8b4 signs directory/META
+
+# pmc drat [chair] magicaltrout
+key 1284c0ad5e91d429 signs drat/META
+key a3ac00ed342fcbb1 signs drat/META
+key ac57783ab30355ca signs drat/META
+
+# pmc drill [chair] arina
+key 1c2663191643bb2e signs drill/META
+
+# pmc empire-db [chair] doebele
+key 0279d7d50b5dfb51 signs empire-db/META
+
+# pmc felix [chair] pauls
+key 9054823a859a7237 signs felix/META
+
+# pmc forrest [chair] crossley
+key aa4c2f533248a46e signs forrest/META
+key c139f15323cb7a2a signs forrest/META
+
+# pmc freemarker [chair] ddekany
+key 1939a2520bab1d90 signs freemarker/META
+
+# pmc geronimo [chair] rmannibucau
+key a8de0a4db863a7c1 signs geronimo/META
+
+# pmc gora [chair] djkevincr
+key 396da771a3e66ac7 signs gora/META
+key d245b5f65d45bd03 signs gora/META
+
+# pmc griffin [chair] guoyp
+key 56dcc3c2c3dafffc signs griffin/META
+
+# pmc groovy [chair] paulk
+key 6a65176a0fb1cd0b signs groovy/META
+
+# pmc guacamole [chair] mjumper
+key 5b2977aee5e4518f signs guacamole/META
+
+# pmc gump [chair] bodewig
+key a2115ae15f6b8b72 signs gump/META
+
+# pmc hadoop [chair] vinodkv
+key 255adf56c36c5f0f signs hadoop/META
+
+# pmc httpd [chair] humbedooh
+key d91b182c0f85ecd4 signs httpd/META
+key ddccba490a0a6c57 signs httpd/META
+
+# pmc impala [chair] jbapple
+key 91ee43066850196c signs impala/META
+
+# pmc incubator [chair] jmclean
+key e0f28593aeead151 signs incubator/META
+
+# pmc isis [chair] kevin
+key de22520bcfae78a8 signs isis/META
+
+# pmc james [chair] btellier
+key f86f8285df26568b signs james/META
+
+# pmc jclouds [chair] andreaturli
+key 663a7b41c80334d2 signs jclouds/META
+
+# pmc jena [chair] andy
+key 04c95136d236a58f signs jena/META
+
+# pmc jmeter [chair] milamber
+key ac214caa0612b399 signs jmeter/META
+
+# pmc johnzon [chair] salyh
+key 7903f81190910a83 signs johnzon/META
+key 88f3cf4c22d7f6ec signs johnzon/META
+
+# pmc joshua [chair] tommaso
+key dc7bf9853c1e73f8 signs joshua/META
+
+# pmc jspwiki [chair] juanpablo
+key e616672965422a3d signs jspwiki/META
+
+# pmc juddi [chair] alexoree
+key 26dc9b15e7a298ca signs juddi/META
+key 98ad2e19bff4106d signs juddi/META
+
+# pmc juneau [chair] jamesbognar
+key 36292bd2ba7d3a86 signs juneau/META
+
+# pmc kibble [chair] rbowen
+key 5cfd37facc78c893 signs kibble/META
+
+# pmc kudu [chair] todd
+key 5e43cab9aec77eaf signs kudu/META
+
+# pmc kylin [chair] lukehan
+key a1132f12027dc364 signs kylin/META
+
+# pmc lens [chair] amareshwari
+key 7273ccc17b8a5d79 signs lens/META
+
+# pmc libcloud [chair] tomaz
+key 2c0754b2ce0692f3 signs libcloud/META
+
+# pmc logging [chair] mattsicker
+key d7c92b70fa1c814d signs logging/META
+
+# pmc lucene [chair] ctargett
+key f1a1f48b521a0277 signs lucene/META
+
+# pmc lucenenet [chair] nightowl888
+key 44930432c60154ae signs lucenenet/META
+
+# pmc mahout [chair] akm
+key 61dc71d9140a5be9 signs mahout/META
+
+# pmc manifoldcf [chair] kwright
+key fd1ff09c03824582 signs manifoldcf/META
+
+# pmc marmotta [chair] jakob
+key 362590a7f5cfd915 signs marmotta/META
+
+# pmc maven [chair] rfscholte
+key ae5a7fb608a0221c signs maven/META
+
+# pmc metamodel [chair] kaspersor
+key cb3b22981fe1c2f5 signs metamodel/META
+
+# pmc metron [chair] cestella
+key ab012584bfb3c62c signs metron/META
+
+# pmc mina [user] elecharny
+key 31474e5e7c6b7034 signs mina/META
+
+# pmc mina [chair] gnodet
+key ecdfea3cb4493b94 signs mina/META
+
+# pmc mnemonic [chair] garyw
+key 5bbba01c6e0e838b signs mnemonic/META
+key 9d9b69e51da435d9 signs mnemonic/META
+
+# pmc myfaces [chair] bommel
+key abd632ecc4fc9a65 signs myfaces/META
+
+# pmc mynewt [chair] jmclean
+key e0f28593aeead151 signs mynewt/META
+
+# pmc nifi [chair] joewitt
+key 9093bf854f811a1a signs nifi/META
+
+# pmc nutch [chair] snagel
+key c66ea7b7db0a9c6d signs nutch/META
+
+# pmc ode [chair] sathwik
+key 96d5fb4abb2259d2 signs ode/META
+
+# pmc ofbiz [chair] jacopoc
+key 7a580908847af9e0 signs ofbiz/META
+
+# pmc olingo [chair] mibo
+key faf8a1c815ab5637 signs olingo/META
+
+# pmc oodt [chair] imesha
+key 0504799bd870dce2 signs oodt/META
+
+# pmc openjpa [chair] struberg
+key e91287822fdb81b1 signs openjpa/META
+
+# pmc openmeetings [chair] solomax
+key 9e6917b5c467526e signs openmeetings/META
+
+# pmc opennlp [chair] joern
+key ead2ad9a5ee31f7f signs opennlp/META
+
+# pmc openoffice [chair] petko
+key 5c8c3252a16d2de9 signs openoffice/META
+
+# pmc openwebbeans [chair] struberg
+key e91287822fdb81b1 signs openwebbeans/META
+
+# pmc orc [chair] omalley
+key 1209e7f13d0c92b9 signs orc/META
+
+# pmc parquet [chair] julien
+key 02dabfdf1679d194 signs parquet/META
+key 97d7e8647ae7e47b signs parquet/META
+
+# pmc pdfbox [chair] lehmi
+key 7a3c9fe21dfdbf44 signs pdfbox/META
+
+# pmc perl [chair] gozer
+key cb32a10788c3a5a5 signs perl/META
+
+# pmc phoenix [chair] elserj
+key b7d5cd454677d66c signs phoenix/META
+key d146d62cab471ae9 signs phoenix/META
+
+# pmc pig [chair] knoguchi
+key bad2b5039bc15ef8 signs pig/META
+
+# pmc plc4x [chair] cdutz
+key 089127c15c60d6b9 signs plc4x/META
+key 51de31b65b288057 signs plc4x/META
+
+# pmc poi [chair] centic
+key e196754527b9f635 signs poi/META
+
+# pmc predictionio [chair] donald
+key 6c74ecab8bf4abeb signs predictionio/META
+
+# pmc qpid [chair] robbie
+key 74d820b854fdd85d signs qpid/META
+
+# pmc ranger [chair] sneethir
+key 9c0596b11e19b762 signs ranger/META
+
+# pmc river [chair] peter_firmstone
+key 5014a5de4aec81f3 signs river/META
+key d8b89cdde0fb8a91 signs river/META
+
+# pmc royale [chair] piotrz
+key 76cf6a81d5c80f47 signs royale/META
+
+# pmc santuario [chair] coheigea
+key 67bf80b10ad53983 signs santuario/META
+
+# pmc sentry [chair] kalyan
+key b93801e21053ad7e signs sentry/META
+
+# pmc serf [chair] brane
+key 1bca6586a347943f signs serf/META
+
+# pmc servicemix [chair] ksobkowiak
+key 68bd46d2aff81c77 signs servicemix/META
+
+# pmc sis [chair] desruisseaux
+key d89ef3a674383e9d signs sis/META
+
+# pmc sling [chair] rombert
+key 339508654f63ec54 signs sling/META
+
+# pmc spamassassin [chair] sidney
+key afd1d4136225ea12 signs spamassassin/META
+
+# pmc stanbol [chair] rharo
+key 7a8761d4be0ac802 signs stanbol/META
+
+# pmc steve [chair] humbedooh
+key d91b182c0f85ecd4 signs steve/META
+key ddccba490a0a6c57 signs steve/META
+
+# pmc streams [chair] sblackmon
+key f824594968d51867 signs streams/META
+
+# pmc struts [chair] rgielen
+key c711d5c8066c622a signs struts/META
+
+# pmc subversion [chair] stsp
+key 4f7dbaa99a59b973 signs subversion/META
+key e5d30273f59d25f0 signs subversion/META
+
+# pmc synapse [chair] isudana
+key 54425692e36ce6c3 signs synapse/META
+
+# pmc syncope [chair] ilgrosso
+key 6b4313ed273df287 signs syncope/META
+
+# pmc tajo [chair] hyunsik
+key 024c922aac3885b9 signs tajo/META
+key fe72c36ca7190d98 signs tajo/META
+
+# pmc thrift [chair] jensg
+key 76bd340fc4b75865 signs thrift/META
+
+# pmc tika [chair] tallison
+key 4a51a45b944ffd51 signs tika/META
+
+# pmc tinkerpop [chair] spmallette
+key ea53a99854eab0e6 signs tinkerpop/META
+
+# pmc tomcat [chair] mturk
+key 35cd23c10d498e23 signs tomcat/META
+key bd8082810d59410b signs tomcat/META
+
+# pmc trafficserver [chair] bcall
+key 4d154110b84508ec signs trafficserver/META
+
+# pmc trafodion [chair] pierresmits
+key 0c4091dc31da16ac signs trafodion/META
+
+# pmc turbine [chair] gk
+key 6eaae3d2f615e012 signs turbine/META
+
+# pmc twill [chair] chtyim
+key ca96c2ea2167bdb4 signs twill/META
+
+# pmc uima [chair] schor
+key cc762ffdcd04cfd6 signs uima/META
+
+# pmc unomi [chair] shuber
+key 7c19d1fbbd1ab1df signs unomi/META
+
+# pmc vcl [chair] jfthomps
+key a0d9181bb5f246c3 signs vcl/META
+
+# pmc vxquery [chair] tillw
+key 2501e46bbaed10bc signs vxquery/META
+
+# pmc whimsy [chair] rubys
+key 1d28809a20546256 signs whimsy/META
+
+# pmc wicket [chair] adelbene
+key 878f01faa8d356e1 signs wicket/META
+
+# pmc ws [chair] dkulp
+key 858fc4c4f43856a3 signs ws/META
+key abc8ee39bb550746 signs ws/META
+
+# pmc xalan [chair] ggregory
+key 86fdc7e2a11262cb signs xalan/META
+
+# pmc yetus [chair] aw
+key a342433a56d8d31a signs yetus/META
+key e01b34fbe846df38 signs yetus/META
+
+# pmc zookeeper [chair] fpj
+key 93fb0254d2c80e32 signs zookeeper/META
+
+# pmc zzz [aux] henkp
+key 8b962943fc243f3c signs zzz/checker-tests
+
+# pmc zzz [aux] sebb
+key 7a8860944fad5f62 signs zzz/checker-tests
+key 9f82ce9d9bdf0559 signs zzz/checker-tests

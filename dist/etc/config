@@ -1,0 +1,12 @@
+# mk-root config file ;
+# -- lines starting with '#' are ignored, as are empty lines.
+# -- lines must be like :
+# pmc $pmc add|del key  $key-id       # add/del a key
+# pmc $pmc add|del user $user-id      # add/del a user
+# pmc $pmc add|del chair              # add/del the pmc chair
+# pmc $pmc add|del members            # add/del all pmc members
+# test ; add a comment
+
+aux zzz/checker-tests add user phobosid
+pmc mina add user phobosid
+pmc directory add user phobosid

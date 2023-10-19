@@ -1,0 +1,359 @@
+#! /usr/bin/perl
+
+use strict ;
+use warnings ;
+
+use LWP::UserAgent ;
+use JSON ;
+
+use constant
+  { PMC => 'pmc'
+  , AUX => 'aux'
+  , ACT => 'act'
+  , TYP => 'typ'
+  , KEY => 'key'
+  , USR => 'user'
+  , ADD => 'add'
+  , DEL => 'del'
+  , CHA => 'chair'
+  , MEM => 'members'
+  , ERR => 'ERR'
+  } ;
+
+my $DEF_CONF = 'config' ;
+my $DEF_ROOT = 'ROOT' ;
+my $COMM_URL = 'https://whimsy.apache.org/public/committee-info.json' ;
+my $FPRS_URL = 'https://checker.apache.org/dist/fprs.json' ;
+
+my $prog = substr $0, rindex ( $0, '/' ) + 1 ;
+my $Usage = <<USAGE ;
+Usage: $prog [-v] [-q] [-d] [-h] [-o out] [-c conf]
+option v : be verbose
+option q : be quiet
+option d : show debug info
+option h : show help ; exit
+option o : write \$out ; default "$DEF_ROOT"
+option c : use config \$conf ; default "$DEF_CONF"
+====================================================================
+-- $prog begins with authorisation for \$pmc/META files
+   where \$pmc has a chair with registered keys.
+-- Any additions/deletions must be specified in the \$config file.
+-- On succesful completion, $prog
+   -- writes file \$out [default $DEF_ROOT]
+   -- removes file \$out.asc if "gpg --verify \$out.asc \$out" fails
+====================================================================
+config has lines like :
+
+  pmc \$pmc  add|del key  \$key-id       # add/del a key
+  pmc \$pmc  add|del user \$user-id      # add/del a user
+  pmc \$pmc  add|del chair              # add/del the pmc chair
+  pmc \$pmc  add|del members            # add/del all pmc members
+  aux \$path add|del key  \$key-id       # add/del a key
+  aux \$path add|del user \$user-id      # add/del a user
+  
+USAGE
+sub Usage { die "$_[0]$Usage" ; }
+sub Error { die "[error] $prog: $_[0]\n" ; }
+sub Warn  { warn "[warn] $prog: $_[0]\n" ; }
+
+# usage: &GetOptions(ARG,ARG,..) defines $opt_ID as 1 or user spec'ed value
+# usage: &GetOptions(\%opt,ARG,ARG,..) defines $opt{ID} as 1 or user value
+# ARG = 'ID' | 'ID=SPC' | 'ID:SPC' for no-arg, required-arg or optional-arg
+# ID  = perl identifier
+# SPC = i|f|s for integer, fixedpoint real or string argument
+
+use Getopt::Long ;
+Getopt::Long::config ( 'no_ignore_case' ) ;
+my %opt = () ; Usage '' unless GetOptions
+  ( \%opt, qw(v q d f h l=s o=s c=s) ) ;
+Usage "Arg count\n" unless @ARGV == 0 ;
+
+$opt{v} ||= $opt{d} ;
+
+if ( $opt{h} ) { Usage '' ; exit 0 ; }
+
+if ( $opt{q} )
+  { open STDOUT, '>', '/dev/null' or Error "can't re-open STDOUT ($!)" ;
+    open STDERR, '>', '/dev/null' or Error "can't re-open STDERR ($!)" ;
+  }
+
+my $TAG  = $opt{f} ? 'DID' : 'WOULD' ;
+my $ROOT = $opt{o} || $DEF_ROOT ;
+my $CONF = $opt{c} || $DEF_CONF ;
+
+sub uniq { my %uniq = () ; $uniq { $_ } = $_ for @_ ; values %uniq ; }
+
+sub mk_UA
+  { LWP::UserAgent -> new
+      ( timeout => 5
+      , agent => 'apache checker'
+      , keep_alive => 1
+      , ssl_opts =>
+        { verify_hostname => 1
+        , SSL_ca_file => 'etc/cert-chain.pem'
+        }
+      ) ;
+  }
+
+sub get_json
+  { my $url  = shift ;
+    print "get $url ...\n" ;
+    my $res ;
+    my $UA   = mk_UA ;
+    my $resp = $UA -> get ( $url ) ;
+    my $succ = $resp -> is_success ;
+    if ( $succ )
+      { $res = $resp -> decoded_content ; }
+    else
+      { Error "can't fetch $url" ; }
+    JSON::decode_json $res ;
+  }
+
+sub get_all_fprs
+  { my $json = get_json $FPRS_URL ;
+    my $recs = $json -> {committers} ;
+    my $hash = {} ;
+    for my $rec ( @$recs )
+      { my ( $uid, $nam, $fps ) = @$rec ;
+        $hash -> { $uid } = { map { $_ => 1 } split /,/, $fps }
+      }
+    $hash ;
+  }
+
+sub mk_comm
+  { my $url  = shift ;
+    my $json = get_json ( $COMM_URL ) -> { committees } ;
+    my $res  = {} ;
+    for my $pmc ( sort keys %$json )
+      { my $comm = $json -> { $pmc } ;
+        next unless $comm -> {pmc} ;
+        my $chair = $comm -> {chair} ;
+        my $uid = ( keys %$chair ) [ 0 ] if keys %$chair == 1 ;
+        $res -> { $pmc } { chair } = $uid ;
+        $res -> { $pmc } {members} = $comm -> {roster} ;
+      }
+    $res ;
+  }
+
+sub Err { my $msg = shift ; my $cnt = shift ; Error "$msg [line $cnt]" ; }
+
+my $fprs = get_all_fprs ;
+my $pmcs = mk_comm $COMM_URL ;
+my $Keys = {} ;
+for my $uid ( sort keys %$fprs )
+  { my $fps = $fprs -> { $uid } ;
+    $Keys -> { $_ } = $uid for keys %$fps ;
+  }
+
+sub keys4uid
+  { my $uid = shift ;
+    if ( my $fps = $fprs -> { $uid } )
+      { keys %$fps ; }
+    else
+      { Error "no keys for uid $uid" ; }
+  }
+
+my @TOKS ;
+my $LINE ;
+my $LCNT = 0 ;
+my $ETOK ;
+
+# my ( $cnt, $line, $key, $act, $pth, $type ) = @$Act ;
+sub emit
+  { my ( $kid, $act, $pth, $type ) = @_ ;
+    [ $LCNT, $LINE, $kid, $act, $pth, $type ] ;
+  }
+
+sub emit_err { my $err = shift ; emit $err, ERR, undef, undef ; }
+
+sub emit_key
+  { my ( $key, $act, $pth, $type ) = @_ ;
+    if ( $Keys -> { $key } )
+      { emit $key, $act, $pth, $type ; }
+    else
+      { emit_err "unknown key [$key]" ; }
+  }
+
+sub emit_uid
+  { my ( $uid, $act, $pth, $type ) = @_ ;
+    my @res = () ;
+    if ( my $fps = $fprs -> { $uid } )
+      { @res = map { emit_key $_, $act, $pth, $type } keys %$fps ; }
+    else
+      { @res = emit_err "no keys for $type $uid $pth" ; }
+    @res ;
+  }
+
+sub emit_cha
+  { my ( $pmc, $act, $pth, $type ) = @_ ;
+    if ( my $Pmc = $pmcs -> { $pmc } )
+      { if ( my $uid = $Pmc -> {chair} )
+          { emit_uid $uid, $act, "$pmc/META", CHA ; }
+        else
+          { emit_err "no chair for pmc [$pmc]" ; }
+      }
+    else
+      { emit_err "no pmc [$pmc]" ; }
+  }
+
+sub next_tok
+  { my @want = @_ ;
+    my $want = join '|', @want ;
+    my $res = shift @TOKS ;
+    unless ( defined $res )
+      { $ETOK = "line incomplete ; expected [$want]" ; }
+    elsif ( @want and not grep $_ eq $res, @want )
+      { $ETOK = "expected [$want] ; got $res" ; }
+    printf "next_tok [%s] want [%s] ETOK [$ETOK]\n", $res || 'UNDEF', $want
+      if $opt{d} ;
+    if ( $ETOK )
+      { goto on_error ; }
+    else
+      { return $res ; }
+  }
+
+sub do_pmc
+  { my $pmc = next_tok ;
+    my $act = next_tok ( ADD, DEL ) ;
+    my $tok = next_tok ( KEY, USR, CHA, MEM ) ;
+
+    if ( $tok eq KEY )
+      { my $kid = next_tok ;
+        emit_key $kid, $act, "$pmc/META", KEY ;
+      }
+    elsif ( $tok eq USR )
+      { my $uid = next_tok ;
+        emit_uid $uid, $act, "$pmc/META", USR ;
+      }
+    elsif ( $tok eq CHA )
+      { emit_cha $pmc, $act, "$pmc/META", CHA ; }
+    elsif ( $tok eq MEM )
+      { Error "don't use 'add members'" ; }
+  }
+
+sub do_aux
+  { my $aux = next_tok ;
+    my $act = next_tok ( ADD, DEL ) ;
+    my $tok = next_tok ( KEY, USR ) ;
+    if ( $tok eq KEY )
+      { my $kid = next_tok ;
+        emit $kid, $act, $aux, AUX ;
+      }
+    elsif ( $tok eq USR )
+      { my $uid = next_tok ;
+        emit_uid $uid, $act, $aux, AUX ;
+      }
+  }
+
+sub do_line
+  { $LINE = shift ;
+    @TOKS = split ' ', $LINE ;
+    $ETOK = '' ;
+    print "line: [$LINE]\n" if $opt{d} ;
+    my @res ;
+    my $tok = next_tok ( PMC, AUX ) ;
+    if ( $tok eq PMC )
+      { @res = do_pmc ; }
+    elsif ( $tok eq AUX )
+      { @res = do_aux ; }
+
+on_error:
+    if ( $ETOK )
+      { @res = emit_err $ETOK ; }
+    elsif ( @TOKS )
+      { @res = emit_err "spurious tokens [@TOKS]" ; }
+    @res ;
+  }
+
+sub all_chairs
+  { my $pmcs = shift ;
+    my @res  = () ;
+    for my $pmc ( sort keys %$pmcs )
+      { push @res, do_line "pmc $pmc add chair" ; }
+    @res ;
+  }
+
+sub get_conf
+  { my @res = () ;
+    my $err = '' ;
+    open CONF, '<', $CONF or Error "can't open $CONF ($!)" ;
+    while ( my $line = <CONF> )
+      { $LCNT ++ ;
+        chomp $line ; $line =~ s/\s\s+/ /g ;
+        next if $line =~ /^\s*$/ ;
+        next if $line =~ /^#/ ;
+        push @res, do_line lc $line ;
+      }
+    close CONF ;
+    @res ;
+  }
+
+my @Acts = ( all_chairs ( $pmcs ), get_conf ) ;
+my $Root = {} ;
+my $Text = "# Generated ; DO NOT EDIT\n\n" ;
+
+{ my $Errs = 0 ;
+  for my $Act ( @Acts )
+    { my ( $cnt, $line, $err, $act, $pth, $type ) = @$Act ;
+      if ( $cnt and $act eq ERR )
+        { $Errs = 1 ; print "error line[$cnt]: $line\n  $err\n" ; }
+    }
+  if ( $Errs )
+    { print "exit ; not writing file $ROOT\n" ; exit 1 }
+  else
+    { print "No errors found ; writing $ROOT ...\n" ; }
+}
+
+for my $Act ( @Acts )
+  { my ( $cnt, $line, $key, $act, $pth, $type ) = @$Act ;
+    my $uid = $Keys -> { $key || '' } ;
+    if ( $act eq ADD )
+      { $Root -> { $pth } { $key } = [ $type, $uid ] ; }
+    elsif ( $act eq DEL )
+      { delete $Root -> { $pth } { $key } ; }
+    elsif ( $act eq ERR )
+      { $Text .= "# $key\n" ; }
+    else
+      { Error "unknown action ($act)" ; }
+    if ( $opt{d} )
+      { printf "act=[%s]\n", join ',', map { $_ || '_' } @$Act ; }
+  }
+
+# output by pth, uid, key
+for my $pth ( sort keys %$Root )
+  { my $Pmc = $Root -> { $pth } ;
+    my $pmc = $pth ; $pmc =~ s!/.*!! ;
+    my %uids = () ;
+    for my $key ( sort keys %$Pmc )
+      { my ( $typ, $uid ) = @{ $Pmc -> { $key } } ;
+        $uids { $uid } { $key } = $typ ;
+      }
+    for my $uid ( sort keys %uids )
+      { my $keys = $uids { $uid } ;
+        my $typs = join ',', uniq values %$keys ;
+        $Text .= "\n# pmc $pmc [$typs] $uid\n" ;
+        $Text .= "key $_ signs $pth\n" for sort keys %$keys  ;
+      }
+  }
+
+my $TMP = "$ROOT.tmp" ;
+open TMP, '>', $TMP or Error "can't write $TMP ($!)" ;
+print TMP $Text or Error "can't print Text ($!)" ;
+close TMP ;
+my $size_tmp = -s $TMP ;
+my $size_txt = length $Text ;
+Error "bad size for $TMP (should be $size_txt)" if $size_tmp != $size_txt ;
+rename $TMP, $ROOT or Error "can't rename $TMP $ROOT ($!)" ;
+printf "Created file $ROOT\n" ;
+
+my $ASC = "$ROOT.asc" ;
+my @CMD = ( qw(gpg --verify), $ASC, $ROOT ) ;
+my $CMD = join ' ', @CMD ;
+if ( -f $ASC )
+  { printf "verifying $ASC ...\n" ;
+    printf "running $CMD ...\n" if $opt{d} ;
+    unless ( system ( @CMD ) == 0 )
+      { printf "verify $ASC failed ; unlinking $ASC\n" ;
+        unlink $ASC ;
+      }
+  }
