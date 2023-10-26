@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&family=Varela+Round&display=swap');
 .Button_Btn__SdVmM {
     -moz-appearance: none;
     appearance: none;
@@ -424,7 +424,7 @@ html {
     -moz-tab-size: 4;
     -o-tab-size: 4;
     tab-size: 4;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-family: 'Varela Round', sans-serif;
     font-feature-settings: normal;
     font-variation-settings: normal
 }
@@ -468,7 +468,7 @@ code,
 kbd,
 pre,
 samp {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    font-family: 'Space Mono', monospace;
     font-size: 1em
 }
 
@@ -3875,15 +3875,7 @@ video {
 }
 
 .font-mono {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace
-}
-
-.font-montserrat {
-    font-family: Montserrat, sans-serif
-}
-
-.font-worksans {
-    font-family: Work Sans, sans-serif
+    font-family: 'Space Mono', monospace
 }
 
 .text-2xl {
@@ -4531,7 +4523,7 @@ body {
 
 .article-content h1 {
     font-weight: 700;
-    font-family: Montserrat, sans-serif
+    font-family: 'Varela Round', sans-serif
 }
 
 .main-article>h1:first-child {
@@ -4545,7 +4537,7 @@ body {
 .article-content h2,
 .article-content h3 {
     line-height: 1.75rem;
-    font-family: Montserrat, sans-serif;
+    font-family: 'Varela Round', sans-serif;
     font-weight: 600;
     margin-bottom: .5rem
 }
@@ -6715,7 +6707,7 @@ body {
 }
 
 .react-datepicker {
-    font-family: Helvetica Neue, helvetica, arial, sans-serif;
+    font-family: 'Varela Round', sans-serif;
     font-size: .8rem;
     background-color: #fff;
     color: #000;
