@@ -1,0 +1,25 @@
+{
+  "name": "phobosid.github.io",
+  "version": "1.0.0",
+  "description": "A Simple Linktree or Biolink using React Frameworks for Social Media Needs.",
+  "main": "index.html",
+  "scripts": {
+    "test": "xdg-open https://phobosid.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhobosID/phobosid.github.io.git"
+  },
+  "keywords": [
+    "PhobosID",
+    "react",
+    "biolink",
+    "linktree"
+  ],
+  "author": "PhobosID",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PhobosID/phobosid.github.io/issues"
+  },
+  "homepage": "https://github.com/PhobosID/phobosid.github.io#readme"
+}
