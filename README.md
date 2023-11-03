@@ -11,7 +11,7 @@ The ``script.js`` file consist of Main Script for the Website and React.js Frame
 
 ## Code Coverage
 
-![JavaScript](https://img.shields.io/badge/JavaScript-99.8-yellow.svg) ![HTML](https://img.shields.io/badge/HTML-0.1-orange) ![CSS](https://img.shields.io/badge/CSS-0.1-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-0-yellow.svg) ![HTML](https://img.shields.io/badge/HTML-100-orange) ![CSS](https://img.shields.io/badge/CSS-0-blue)
 
 
 ## File Mapping
