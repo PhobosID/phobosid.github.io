@@ -1,9 +1,7 @@
 
 # PHOBOSID.GITHUB.IO
 
-A Simple Biolink using React.js Frameworks for My Social Media Promotion Needs! All Files (except JS) are Minified.
-
-The ``script.js`` file consist of Main Script for the Website and React.js Framework Combined. 80K+ Lines of Code. The Website Might Load Slower at the First Visit.
+A Simple Biolink using Next.js Frameworks for My Social Media Promotion Needs! All Essential Files (HTML, CSS, and JS) are Minified.
 
 - Author: [@PhobosID](https://www.github.com/phobosid)
 - License: [MIT](https://choosealicense.com/licenses/mit/)
