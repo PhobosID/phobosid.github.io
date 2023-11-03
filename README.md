@@ -9,14 +9,22 @@ The ``script.js`` file consist of Main Script for the Website and React.js Frame
 - License: [MIT](https://choosealicense.com/licenses/mit/)
 
 
-
-
-
 ## Code Coverage
 
-- ![JavaScript](https://img.shields.io/badge/JS-99.8-yellow.svg)
-- ![HTML](https://img.shields.io/badge/HTML-0.1-orange)
-- ![CSS](https://img.shields.io/badge/CSS-0.1-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-99.8-yellow.svg) ![HTML](https://img.shields.io/badge/HTML-0.1-orange) ![CSS](https://img.shields.io/badge/CSS-0.1-blue)
+
+
+## File Mapping
+
+Too much files on the root? Don't Know what's Important? No Worries! Take a look to the table below.
+
+| Category | Direction |
+| ------ | ------ |
+| Main HTML File | [index.html](https://github.com/PhobosID/phobosid.github.io/blob/main/index.html) |
+| Main Stylesheet | [style.css](https://github.com/PhobosID/phobosid.github.io/blob/main/style.css) |
+| Main JavaScript | [script.js](https://github.com/PhobosID/phobosid.github.io/blob/main/script.js) |
+| License | [LICENSE](https://github.com/PhobosID/phobosid.github.io/blob/main/LICENSE) |
+| Sitemap | [sitemap.xml](https://github.com/PhobosID/phobosid.github.io/blob/main/sitemap.xml) |
 
 
 ## View the Website
