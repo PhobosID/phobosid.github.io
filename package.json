@@ -1,7 +1,7 @@
 {
   "name": "phobosid.github.io",
   "version": "1.0.0",
-  "description": "A Simple Linktree or Biolink using React Frameworks for Social Media Needs.",
+  "description": "A Simple Website About Myself Hosted Through GitHub Pages",
   "main": "index.html",
   "scripts": {
     "test": "xdg-open https://phobosid.github.io"
@@ -12,9 +12,9 @@
   },
   "keywords": [
     "PhobosID",
-    "react",
-    "biolink",
-    "linktree"
+    "Website",
+    "Personal",
+    "Portpolio"
   ],
   "author": "PhobosID",
   "license": "MIT",
