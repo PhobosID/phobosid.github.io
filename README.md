@@ -1,20 +1,10 @@
+<div align="center"><img src="images/banner.png"></div>
 
-# PHOBOSID.GITHUB.IO
-
-A Simple Website that you shouldn't visit. All Essential Files (HTML, CSS, and JS) are Minified.
-
-- Author: [@PhobosID](https://www.github.com/phobosid)
-- License: [MIT](https://choosealicense.com/licenses/mit/)
-
-
-## Code Coverage
-
-![JavaScript](https://img.shields.io/badge/JavaScript-0-yellow.svg) ![HTML](https://img.shields.io/badge/HTML-100-orange) ![CSS](https://img.shields.io/badge/CSS-0-blue)
-
+A Simple Website About Myself Hosted Through GitHub Pages. Website Layout is inspired by S.id and About.me Website.
 
 ## File Mapping
 
-Too much files on the root? Don't Know what's Important? No Worries! Take a look to the table below.
+Feeling Lost? Then take a Look at this table!
 
 | Category | Direction |
 | ------ | ------ |
@@ -23,23 +13,24 @@ Too much files on the root? Don't Know what's Important? No Worries! Take a look
 | Main JavaScript | [script.js](https://github.com/PhobosID/phobosid.github.io/blob/main/script.js) |
 | License | [LICENSE](https://github.com/PhobosID/phobosid.github.io/blob/main/LICENSE) |
 | Sitemap | [sitemap.xml](https://github.com/PhobosID/phobosid.github.io/blob/main/sitemap.xml) |
+| Images | [sitemap.xml](https://github.com/PhobosID/phobosid.github.io/blob/main/images/) |
 
 
 ## View the Website
 
-You can View my Website by [Click Here](https://phobos.id) or Using:
+You can View my Website by [Click Here](https://phobosid.github.io) or Using:
 
 - Linux Terminal:
 ```terminal
-xdg-open https://phobos.id
+xdg-open https://phobosid.github.io
 ```
 - Windows Command Prompt:
 ```cmd
-explorer "https://phobos.id"
+explorer "https://phobosid.github.io"
 ```
 - MacOS Terminal:
 ```terminal
-open "https://phobos.id"
+open "https://phobosid.github.io"
 ```
 ## Screenshots
 
