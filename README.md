@@ -1,7 +1,7 @@
 
 # PHOBOSID.GITHUB.IO
 
-A Simple Biolink using Next.js Frameworks for My Social Media Promotion Needs! All Essential Files (HTML, CSS, and JS) are Minified.
+A Simple Website that you shouldn't visit. All Essential Files (HTML, CSS, and JS) are Minified.
 
 - Author: [@PhobosID](https://www.github.com/phobosid)
 - License: [MIT](https://choosealicense.com/licenses/mit/)
