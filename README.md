@@ -45,6 +45,4 @@ explorer "https://phobosid.github.io"
 open "https://phobosid.github.io"
 ```
 ## Screenshots
-
-![App Screenshot](https://i.ibb.co/SJgGTvj/Website.png)
-
+<div align="justify"><img src="images/screenshot.png"></div>
